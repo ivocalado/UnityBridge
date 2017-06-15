@@ -31,36 +31,19 @@ public class UnityServlet extends HttpServlet {
 
     /**
      * Pattern:
-     * .../UnityBridge/UnityServlet?emotion=emotion_name
-     * 
-     * 
+     * ../UnityBridge/OntologyServlet?verb=giveemotion
+
      */
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		/*
-		 * if verbParam == getemotion 
-		 * 		if queue is empty 
-		 * 			send neutral
-		 * 		else
-		 * 			peak and remove
-		 * else
-		 * 		bad reques
-		 *   
-		 */
 		final String verbParam = request.getParameter("verb");
 		final OutputStream out = response.getOutputStream();
 		if(verbParam.equals("getemotion")) {
-			if(!isEmotionQueueEmpty()) {
-				while(!isEmotionQueueEmpty()) {
-					((ServletOutputStream) out).print(messageBundle());
-					break;
-				}
-			}
-			else {
+			if(!isEmotionQueueEmpty())
+				((ServletOutputStream) out).print(messageBundle());
+			else
 				((ServletOutputStream) out).print("neutral");
-				response.getWriter().println("Queue empty, sending neutral");
-			}
 		} else {
 			//bad request
 			((ServletOutputStream) out).print("neutral");
@@ -68,7 +51,7 @@ public class UnityServlet extends HttpServlet {
 		
 	}
 
-	private String  messageBundle() {
+	private String messageBundle() {
 		String msg = queue.peek();
 		queue.remove();
 		return msg;
