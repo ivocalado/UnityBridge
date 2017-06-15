@@ -26,7 +26,7 @@ public class OntologyServlet extends HttpServlet {
 
     /**
      * Pattern:
-     * .../UnityBridge/OntologyServlet?verb=giveemotion
+     * .../UnityBridge/UnityServlet?emotion=emotion_name
      * 
      */
 	protected void doGet(HttpServletRequest request, 
