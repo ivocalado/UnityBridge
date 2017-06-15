@@ -18,7 +18,7 @@ import com.nees.senativos.requesthandler.EmotionsHandler;
 public class OntologyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private Queue<String> queue = EmotionsHandler.getEmotions();
+	private Queue<String> queue = EmotionsHandler.getInstance().getEmotions();
 	
     public OntologyServlet() {
         super();
